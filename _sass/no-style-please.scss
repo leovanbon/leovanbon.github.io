@@ -30,7 +30,7 @@ html { height: 100%; scroll-behavior: smooth; }
 body {
   color: black;
   font-family: monospace;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.4;
   margin: 0;
   min-height: 100%;
@@ -50,7 +50,7 @@ li { margin: 0.4rem 0; }
 *:target { background: yellow; }
 
 .w {
-  max-width: 640px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 4rem 2rem;
 }
@@ -72,6 +72,7 @@ table, th, td {
 }
 
 code {
+  font-style: italic;
   color: white;
   background: black;
 }
@@ -95,4 +96,90 @@ img {
   max-width: 100%;
   display: block;
   margin: 0 auto;
+}
+
+// Fixed contents / table-of-contents block in the bottom-right corner.
+// This is positioned independently from the `.w` content container so
+// it does not affect layout or alignment of the post content.
+#post-toc.post-toc,
+#post-toc {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 280px;
+  max-height: 70vh;
+  overflow: auto;
+  background: #f5f5f5;
+  color: #111;
+  border: thin solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  z-index: 1100;
+  /* Disable animation: hide by default and show immediately when `.open` is added */
+  display: none;
+  font-size: 10px;
+}
+
+#post-toc.open {
+  display: block;
+}
+
+#post-toc h3 { margin-top: 0; }
+
+.post-toc .toc-close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.4rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Toggle button sits above the TOC so it can be used to open it on small screens */
+#toc-toggle.toc-toggle,
+.toc-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + 3.25rem);
+  z-index: 1110;
+  background: #eee;
+  border: thin solid #bbb;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Responsive: on small screens, make the opened TOC full-screen */
+@media (max-width: 800px) {
+  #post-toc {
+    right: 0.5rem;
+    left: 0.5rem;
+    bottom: 1rem;
+    width: auto;
+    max-height: 70vh;
+    display: none;
+  }
+  #post-toc.open {
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    max-height: none;
+    border-radius: 0;
+    padding: 1.25rem;
+    overflow: auto;
+  }
+
+  #toc-toggle { display: inline-block; }
+}
+
+@media (min-width: 801px) {
+
+  #post-toc { display: none; }
+  #post-toc.open { display: block; }
+  #toc-toggle { display: inline-block; }
 }
