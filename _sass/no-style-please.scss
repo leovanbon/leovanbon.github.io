@@ -71,10 +71,17 @@ table, th, td {
   padding: 0.4rem;
 }
 
+/* Inline code styling */
 code {
-  font-style: italic;
   color: white;
   background: black;
+  font-style: normal; /* don't use italic for code */
+  /* prefer Cascadia if available, fall back to common monospace fonts */
+  font-family: "CascadiaMonoNFRoman-Regular", "Fira Code", "DejaVu Sans Mono", Menlo, Monaco, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
 }
 
 div.highlighter-rouge code {
@@ -82,6 +89,16 @@ div.highlighter-rouge code {
   overflow-x: auto;
   white-space: pre-wrap;
   padding: 1rem;
+  font-family: "CascadiaMonoNFRoman-Regular", "Fira Code", "DejaVu Sans Mono", Menlo, Monaco, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* Additional selectors to catch common code block classes */
+pre, pre[class*="language-"], code[class*="language-"] {
+  font-family: "CascadiaMonoNFRoman-Regular", "Fira Code", "DejaVu Sans Mono", Menlo, Monaco, monospace;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 blockquote {
