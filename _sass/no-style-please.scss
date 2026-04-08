@@ -12,23 +12,48 @@
   }
 }
 
-body[a="dark"] { @include dark-appearance; }
-
+/* Dark-mode variables (applied when the site sets body[a="dark"] or
+   when body[a="auto"] and the user prefers dark via media query). */
+body[a="dark"] {
+  --bg: #111111;
+  --text: #eeeeee;
+  --link: #c00; /* keep same red in dark mode */
+  --link-hover: #900;
+  --code-bg: #222222;
+  --code-text: #ffffff;
+}
 
 @media (prefers-color-scheme: dark) {
-  body[a="auto"] { @include dark-appearance; }
+  body[a="auto"] {
+    --bg: #111111;
+    --text: #eeeeee;
+    --link: #c00;
+    --link-hover: #900;
+    --code-bg: #222222;
+    --code-text: #ffffff;
+  }
 }
 // -------------------------------------------- //
+
+// Color variables for light/dark theming. Avoid filter-based inversion.
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --link: #c00;
+  --link-hover: #900;
+  --code-bg: #000000;
+  --code-text: #ffffff;
+}
 
 // bg color is also needed in html in order to
 // block body's background propagation
 // see: https://stackoverflow.com/a/61265706
-html, body { background: white; }
+html, body { background: var(--bg); }
 
 html { height: 100%; scroll-behavior: smooth; }
 
 body {
-  color: black;
+  color: var(--text);
   font-family: monospace;
   font-size: 14px;
   line-height: 1.4;
@@ -37,27 +62,14 @@ body {
   overflow-wrap: break-word;
 }
 
-/* When using the invert-based dark mode, some elements get double-inverted
-   to keep their original appearance (images are handled in the mixin).
-   To keep link and code colors consistent (for example keep links red),
-   cancel the parent's invert by inverting these elements again in dark mode. */
-body[a="dark"] a,
-body[a="dark"] a:link,
-body[a="dark"] a:visited,
-body[a="dark"] code,
-body[a="dark"] pre,
-body[a="dark"] .post-toc {
-  filter: invert(1);
-}
-
 .post-meta { text-align: right; }
 
 /* Link colors: use red across the site, with hover/active darker variant */
 a, a:link, a:visited {
-  color: #c00;
+  color: var(--link);
 }
 a:hover, a:active {
-  color: #900;
+  color: var(--link-hover);
 }
 
 h2, h3, h4, h5, h6 { margin-top: 3rem; }
@@ -94,8 +106,8 @@ table, th, td {
 
 /* Inline code styling */
 code {
-  color: white;
-  background: black;
+  color: var(--code-text);
+  background: var(--code-bg);
   font-style: normal; /* don't use italic for code */
   /* prefer Cascadia if available, fall back to common monospace fonts */
   font-family: "CascadiaMonoNFRoman-Regular", "Fira Code", "DejaVu Sans Mono", Menlo, Monaco, monospace;
