@@ -37,7 +37,28 @@ body {
   overflow-wrap: break-word;
 }
 
+/* When using the invert-based dark mode, some elements get double-inverted
+   to keep their original appearance (images are handled in the mixin).
+   To keep link and code colors consistent (for example keep links red),
+   cancel the parent's invert by inverting these elements again in dark mode. */
+body[a="dark"] a,
+body[a="dark"] a:link,
+body[a="dark"] a:visited,
+body[a="dark"] code,
+body[a="dark"] pre,
+body[a="dark"] .post-toc {
+  filter: invert(1);
+}
+
 .post-meta { text-align: right; }
+
+/* Link colors: use red across the site, with hover/active darker variant */
+a, a:link, a:visited {
+  color: #c00;
+}
+a:hover, a:active {
+  color: #900;
+}
 
 h2, h3, h4, h5, h6 { margin-top: 3rem; }
 
