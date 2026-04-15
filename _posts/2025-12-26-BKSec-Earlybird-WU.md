@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "BKSec Earlybird Writeups"
-date: 2025-12-26 12:00:00 +0000
+date: 2025-12-26 00:00:00 +0000
 categories: [writeup, ctf]
 tags: [dreamhack, reverse]
 ---
