@@ -15,7 +15,7 @@
               "state": {
                 "file": "_posts/2026-04-16-DawgCTF-2026-WU.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "2026-04-16-DawgCTF-2026-WU"
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "3bfc717b79dbdae7",
@@ -186,11 +185,12 @@
   },
   "active": "4beb7256017ff1c6",
   "lastOpenFiles": [
-    "_posts/2026-03-28-TamuCTF-2026-WU.md",
-    "_posts/2026-04-16-DawgCTF-2026-WU.md",
     "_posts/2026-04-04-KalmarCTF-2026-WU.md",
-    "attachment/Pasted image 20260414221437.png",
+    "_posts/2026-04-16-DawgCTF-2026-WU.md",
     "_posts/2025-12-26-BKSec-Earlybird-WU.md",
+    "_posts/2026-03-08-BKSec-Recruitment-WU.md",
+    "_posts/2026-03-28-TamuCTF-2026-WU.md",
+    "attachment/Pasted image 20260414221437.png",
     "attachment/1cb8be558f2a6715ce361fc7da887756.png",
     "attachment/Pasted.md",
     "attachment/Pasted image 20260416003312.png",
