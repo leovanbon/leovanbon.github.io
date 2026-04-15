@@ -1,0 +1,205 @@
+{
+  "main": {
+    "id": "118a1ef8704bd551",
+    "type": "split",
+    "children": [
+      {
+        "id": "11c8fa1109050cb3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4beb7256017ff1c6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2026-04-16-DawgCTF-2026-WU.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-04-16-DawgCTF-2026-WU"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "db5a533e980ef86f",
+    "type": "split",
+    "children": [
+      {
+        "id": "23836b89b0f793db",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "98f004ecfe6715b2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "61e6d4c6bdece4fd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "fa735655d119f14e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "3bfc717b79dbdae7",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e3ef5bc250a70c9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "20f4560e2f604292",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/2026-04-11-DawgCTF-2026-WU.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 2026-04-11-DawgCTF-2026-WU"
+            }
+          },
+          {
+            "id": "18f22eded1690552",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_posts/2026-04-11-DawgCTF-2026-WU.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2026-04-11-DawgCTF-2026-WU"
+            }
+          },
+          {
+            "id": "63a98905624788dd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "d945854080c46eb7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "7a6a3cbe73cc9781",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_posts/2026-04-11-DawgCTF-2026-WU.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2026-04-11-DawgCTF-2026-WU"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "4beb7256017ff1c6",
+  "lastOpenFiles": [
+    "_posts/2026-03-28-TamuCTF-2026-WU.md",
+    "_posts/2026-04-16-DawgCTF-2026-WU.md",
+    "_posts/2026-04-04-KalmarCTF-2026-WU.md",
+    "attachment/Pasted image 20260414221437.png",
+    "_posts/2025-12-26-BKSec-Earlybird-WU.md",
+    "attachment/1cb8be558f2a6715ce361fc7da887756.png",
+    "attachment/Pasted.md",
+    "attachment/Pasted image 20260416003312.png",
+    "attachment/Pasted image 20260416001906.png",
+    "attachment/Pasted image 20260416001902.png",
+    "attachment/Pasted image 20260416001847.png",
+    "attachment/Pasted image 20260416001047.png",
+    "attachment/Pasted image 20260416000149.png",
+    "attachment/Pasted image 20260415235622.png",
+    "attachment/Pasted image 20260415235620.png"
+  ]
+}
