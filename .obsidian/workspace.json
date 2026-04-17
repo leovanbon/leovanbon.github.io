@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "3bfc717b79dbdae7",
@@ -186,23 +185,23 @@
   },
   "active": "4beb7256017ff1c6",
   "lastOpenFiles": [
+    "attachment/Pasted image 20260417101223.png",
+    "attachment/Pasted image 20260417100222.png",
+    "attachment/Pasted image 20260417100154.png",
+    "attachment/Pasted image 20260417100032.png",
+    "attachment/Pasted image 20260417095957.png",
+    "_posts/2026-03-28-TamuCTF-2026-WU.md",
+    "_posts/2026-04-04-KalmarCTF-2026-WU.md",
+    "_posts/2026-04-16-DawgCTF-2026-WU.md",
+    "attachment/Pasted image 20260417093937.png",
+    "attachment/Pasted image 20260417093901.png",
     "attachment/Pasted image 20260417034416.png",
     "attachment/Pasted image 20260417030418.png",
     "attachment/Pasted image 20260417025641.png",
     "attachment/Pasted image 20260417023159.png",
-    "attachment/Pasted image 20260417022918.png",
-    "attachment/Pasted image 20260417015133.png",
-    "attachment/Pasted image 20260417015130.png",
-    "attachment/Pasted image 20260417015059.png",
-    "attachment/Pasted image 20260417013138.png",
-    "_posts/2026-04-16-DawgCTF-2026-WU.md",
-    "attachment/Pasted image 20260417003307.png",
-    "_posts/2026-04-04-KalmarCTF-2026-WU.md",
     "_site/dawgctf-2026-wu.html",
-    "_site/attachment/Pasted image 20260416003312.png",
     "_posts/2025-12-26-BKSec-Earlybird-WU.md",
     "_posts/2026-03-08-BKSec-Recruitment-WU.md",
-    "_posts/2026-03-28-TamuCTF-2026-WU.md",
     "attachment/Pasted.md"
   ]
 }
