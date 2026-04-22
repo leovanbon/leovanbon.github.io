@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-03-28-TamuCTF-2026-WU.md",
+                "file": "_posts/2026-04-22-CIT@CTF-2026-WU.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-28-TamuCTF-2026-WU"
+              "title": "2026-04-22-CIT@CTF-2026-WU"
             }
           },
           {
@@ -199,6 +199,7 @@
   },
   "active": "4beb7256017ff1c6",
   "lastOpenFiles": [
+    "_posts/2026-03-28-TamuCTF-2026-WU.md",
     "no-style-please.gemspec",
     "assets/js/mouse_coords.js",
     "assets/css/main.scss",
@@ -209,9 +210,7 @@
     "_layouts/default.html",
     "_layouts/archive.html",
     "_includes/post_list.html",
-    "_includes/menu_item.html",
     "_posts/2026-04-22-CIT@CTF-2026-WU.md",
-    "_posts/2026-03-28-TamuCTF-2026-WU.md",
     "attachment/Pasted image 20260423000827.png",
     "attachment/Pasted image 20260423000502.png",
     "attachment/Pasted image 20260422233309.png",
