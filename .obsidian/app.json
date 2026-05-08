@@ -5,5 +5,11 @@
   "spellcheck": false,
   "useMarkdownLinks": true,
   "newLinkFormat": "absolute",
-  "alwaysUpdateLinks": false
+  "alwaysUpdateLinks": false,
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
 }
