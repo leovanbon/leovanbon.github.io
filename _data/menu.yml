@@ -5,7 +5,7 @@ entries:
   - title: hello, i'm a1rfry9r, this is where i put my writeups.
   - title: posts
     post_list:
-      limit: 5
+      limit: 50
       show_more: true
       show_more_text: See archive...
       show_more_url: archive.html
