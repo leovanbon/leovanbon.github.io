@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2026-04-11-DawgCTF-2026-WU.md",
+                "file": "_posts/TASK FORCE NIGHTFALL.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 2026-04-11-DawgCTF-2026-WU"
+              "title": "Backlinks for TASK FORCE NIGHTFALL"
             }
           },
           {
@@ -156,21 +156,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2026-04-11-DawgCTF-2026-WU.md",
+                "file": "_posts/TASK FORCE NIGHTFALL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2026-04-11-DawgCTF-2026-WU"
+              "title": "Outline of TASK FORCE NIGHTFALL"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -185,20 +185,21 @@
   },
   "active": "a8316446d2d453b0",
   "lastOpenFiles": [
+    "attachment/Pasted image 20260522234030.png",
+    "attachment/Pasted image 20260522233515.png",
+    "attachment/Pasted image 20260522233018.png",
+    "attachment/Pasted image 20260522232221.png",
+    "attachment/Pasted image 20260522231508.png",
+    "attachment/Pasted image 20260522230542.png",
+    "attachment/Pasted image 20260522223151.png",
+    "attachment/Pasted image 20260522222939.png",
     "_posts/REV-htb-global-cyber-skills-benchmark-ctf-2026-project-nightfall.md",
+    "_posts/TASK FORCE NIGHTFALL.md",
     "attachment/Pasted image 20260522004942.png",
     "attachment/Pasted image 20260521234504.png",
-    "_posts/TASK FORCE NIGHTFALL.md",
     "attachment/Pasted image 20260521190732.png",
-    "attachment/Pasted image 20260521185557.png",
-    "attachment/Pasted image 20260521185412.png",
-    "attachment/Pasted image 20260521183410.png",
-    "attachment/Pasted image 20260521183206.png",
-    "attachment/Pasted image 20260521183144.png",
     "_posts/TASK_FORCE_NIGHTFALL_writeup_tables_markdown.md",
     "output/REV-htb-global-cyber-skills-benchmark-ctf-2026-project-nightfall.md",
-    "output/attachment/0f54af574630e051e74f02d1df993eff.png",
-    "output/attachment/d0a6e73704c6fa19187abcb058260178.png",
     "output/attachment",
     "output",
     "_posts/2026-05-08-HTB-callfuscated.md",
