@@ -19,6 +19,10 @@
      -%}
     {%-endif-%}
 
+    {%-if item.external_post_list-%}
+      {%-include external_post_list.html-%}
+    {%-endif-%}
+
     {%-if item.entries-%}
       {%-include menu_item.html collection=item.entries-%}
     {%-endif-%}

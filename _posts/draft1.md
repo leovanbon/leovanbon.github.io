@@ -316,4 +316,4 @@ Vậy vendor bị cài cắm là  *TRUSTED GRID SOLUTION LLC*, contract tương 
 
 ## Final thoughts
 
-...
+Các thử thách 
