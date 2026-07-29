@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cyber-Apocalypse CTF 2026
-date: 2026-07-29
+date: 2026-07-29 21:00:00 +0700
 categories:
   - writeup
   - htb
