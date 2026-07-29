@@ -59,7 +59,7 @@ Using the same marking approach as I did for `sub_1400063E5`, I was left with a 
 
 ![](attachment/Pasted%20image%2020260728230540.png)
 
-After scanning through them, I found a familiar pattern in `sub_14000340B`: it parses the timestamp fields, writes derived values into a blob, checks that blob, and then operates on it.
+After scanning through them, I found a familiar pattern in `sub_14000340B` :
 
 ### Suspicious Part
 
