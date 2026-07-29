@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cyber-Apocalypse CTF 2026
+title: Cyber Apocalypse CTF 2026
 date: 2026-07-29 21:00:00 +0700
 categories:
   - writeup
@@ -13,7 +13,7 @@ This one felt good, so I wrote up this challenge.
 
 # CorpSyncAudit [rev]
 
-From the challenge description, the scenario is that a malicious program disguised as audit software **was installed on all employees' machines**. It is also hinted that one of the log **files** can trigger malicious behavior that creates a backdoor on the victim's machine.
+From the challenge description, the scenario is that a malicious program disguised as audit software was installed on all employees' machines. It is also hinted that one of the log files can trigger malicious behavior that creates a backdoor on the victim's machine.
 
 We are given a PE file, `CorpSyncAudit.exe`, and a folder of logs.
 
