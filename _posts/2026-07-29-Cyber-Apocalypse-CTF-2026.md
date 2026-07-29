@@ -8,6 +8,7 @@ categories:
 tags:
   - htb
 ---
+![](attachment/Pasted%20image%2020260729222159.png)
 
 This one felt good, so I wrote up this challenge.
 
