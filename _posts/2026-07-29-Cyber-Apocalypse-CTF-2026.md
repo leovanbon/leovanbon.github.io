@@ -105,7 +105,7 @@ Then it transfers control to the main payload logic at `0xCA`.
 Note that when it executes `call loc_CA`, the address `0x0A` is pushed onto the stack.
 So `pop rbp` stores that `0x0A` in `rbp`.
 
-Because shellcode is self-contained and position-independent, it must have some way to resolve the APIs needed to run that command. We can infer that `sub_A` is the API resolver for this shellcode.
+Because shellcode is self-contained and position-independent, it must have some way to resolve the APIs needed to run things. We can infer that `sub_A` is the API resolver for this shellcode.
 
 That part can be annotated like this:
 
