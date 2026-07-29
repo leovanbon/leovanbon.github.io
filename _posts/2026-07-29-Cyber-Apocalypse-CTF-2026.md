@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cyber-Apocalypse CTF 2026
+title: Cyber Apocalypse CTF 2026
 date: 2026-07-29 21:00:00 +0700
 categories:
   - writeup
@@ -14,7 +14,7 @@ This one felt good, so I wrote up this challenge.
 
 # CorpSyncAudit [rev]
 
-From the challenge description, the scenario is that a malicious program disguised as audit software **was installed on all employees' machines**. It is also hinted that one of the log **files** can trigger malicious behavior that creates a backdoor on the victim's machine.
+From the challenge description, the scenario is that a malicious program disguised as audit software was installed on all employees' machines. It is also hinted that one of the log files can trigger malicious behavior that creates a backdoor on the victim's machine.
 
 We are given a PE file, `CorpSyncAudit.exe`, and a folder of logs.
 
@@ -60,7 +60,7 @@ Using the same marking approach as I did for `sub_1400063E5`, I was left with a 
 
 ![](attachment/Pasted%20image%2020260728230540.png)
 
-After scanning through them, I found a familiar pattern in `sub_14000340B`: it parses the timestamp fields, writes derived values into a blob, checks that blob, and then operates on it.
+After scanning through them, I found a familiar pattern in `sub_14000340B` :
 
 ### Suspicious Part
 
@@ -106,7 +106,7 @@ Then it transfers control to the main payload logic at `0xCA`.
 Note that when it executes `call loc_CA`, the address `0x0A` is pushed onto the stack.
 So `pop rbp` stores that `0x0A` in `rbp`.
 
-Because shellcode is self-contained and position-independent, it must have some way to resolve the APIs needed to run that command. We can infer that `sub_A` is the API resolver for this shellcode.
+Because shellcode is self-contained and position-independent, it must have some way to resolve the APIs needed to run things. We can infer that `sub_A` is the API resolver for this shellcode.
 
 That part can be annotated like this:
 
