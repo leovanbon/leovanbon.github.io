@@ -9,3 +9,4 @@ _site
 vendor
 Gemfile.lock
 .obsidian/workspace.json
+.trash/
