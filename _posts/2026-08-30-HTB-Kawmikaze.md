@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HTB - Kawmikaze
-date: 2026-08-31
+date: 2026-08-30
 categories:
   - writeup
   - htb
@@ -193,7 +193,7 @@ So the key is `run`.
 
 ![](attachment/Pasted%20image%2020260831152928.png)
 
-It comes from the `IMAGE_DOS_HEADER`/DOS stub area.
+It comes from the `IMAGE_DOS_HEADER`.
 
 ### Task 3
 
