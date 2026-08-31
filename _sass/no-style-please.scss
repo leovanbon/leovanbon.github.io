@@ -82,7 +82,7 @@ li { margin: 0.4rem 0; }
 
 *:target { background: yellow; }
 
-.w {
+.page-content > .w {
   max-width: 1000px;
   margin: 0 auto;
   padding: 4rem 2rem;
@@ -117,21 +117,35 @@ code {
   border-radius: 3px;
 }
 
-div.highlighter-rouge code {
-  display: block;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  padding: 1rem;
-  font-family: "CascadiaMonoNFRoman-Regular", "Fira Code", "DejaVu Sans Mono", Menlo, Monaco, monospace;
-  font-size: 12px;
-  line-height: 1.45;
-}
-
 /* Additional selectors to catch common code block classes */
 pre, pre[class*="language-"], code[class*="language-"] {
   font-family: "CascadiaMonoNFRoman-Regular", "Fira Code", "DejaVu Sans Mono", Menlo, Monaco, monospace;
   font-size: 12px;
   line-height: 1.45;
+}
+
+pre,
+.highlight {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+pre {
+  background: var(--code-bg);
+  border-radius: 3px;
+  margin: 1rem 0;
+}
+
+pre code,
+div.highlighter-rouge code {
+  box-sizing: border-box;
+  color: var(--code-text);
+  background: var(--code-bg);
+  display: block;
+  min-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 1rem;
+  white-space: pre-wrap;
 }
 
 blockquote {
