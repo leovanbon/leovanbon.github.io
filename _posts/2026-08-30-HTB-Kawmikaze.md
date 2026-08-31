@@ -9,7 +9,7 @@ tags:
   - htb
   - malware
 ---
-	Following the recent breach at ShanoCorp, the Incident Response team identified additional affected hosts within the environment. A suspicious binary was recovered from one of the systems. Investigators determined that the endpoint protection solution had been disabled, and correlation with Prefetch artifacts confirmed the sample was executed shortly afterward. Preliminary Event Log analysis indicates the process was executed with elevated privileges.
+*Following the recent breach at ShanoCorp, the Incident Response team identified additional affected hosts within the environment. A suspicious binary was recovered from one of the systems. Investigators determined that the endpoint protection solution had been disabled, and correlation with Prefetch artifacts confirmed the sample was executed shortly afterward. Preliminary Event Log analysis indicates the process was executed with elevated privileges.*
 
 The challenge artifact is `Kawmikaze`, a PE file. We are given 14 tasks; my approach was to understand the binary as a whole first, then answer the tasks afterward.
 
@@ -56,7 +56,7 @@ A breakpoint before the `ret` reveals everything cleanly.
 ![](attachment/Pasted%20image%2020260831082020.png)
 
 I renamed the variables and proceeded to the next part.
- 
+
 ## Registry as storage
 
 ![](attachment/Pasted%20image%2020260831101131.png)
@@ -107,8 +107,6 @@ The binding links the trigger to the action. Once this object is written, WMI kn
 
 Together, these objects form a permanent WMI event subscription: the malware does not execute the PowerShell command directly here, but registers it so WMI can run it later.
 
-This [reference](https://0xdbgman.github.io/posts/persistence-the-art-of-staying-in/#phase-5-wmi-event-subscriptions--the-fileless-ghost) explains the persistence technique in more detail.
-
 ## Final stage
 
 The PowerShell command can be decoded with:
@@ -120,12 +118,6 @@ import base64; print(base64.b64decode(encoded_payload).decode("utf-16le"))
 The recovered command reads `HKCU\Software\Win32Cache\State`, Base64-decodes it, and treats the result as AES-encrypted data.
 
 ![](attachment/Pasted%20image%2020260831144239.png)
-
-The loader flow is:
-
-```text
-registry State -> Base64 decode -> AES-CBC decrypt -> MD5 check -> Base64 decode -> Invoke-Expression
-```
 
 Then it brute-forces a four-letter lowercase key to recover the expected plaintext and Base64-decodes it again for the final payload.
 
@@ -157,7 +149,25 @@ Running the script recovers the key and final payload:
 
 ![](attachment/Pasted%20image%2020260831150340.png)
 
-This is a TLS PowerShell reverse shell that connects to `10.10.15.38.1337`.
+This is a TLS PowerShell reverse shell that connects to `10.10.15.38:1337`.
+
+Putting the stages together, the loader flow is:
+
+```text
+process start
+  -> TLS callback 0 checks for 0xCC / INT3 anti-debug breakpoints
+  -> TLS callback 1 enumerates minifilter drivers and looks for PROCMON
+  -> TLS callback 2 mangles sub_140001570 if PROCMON is present
+  -> main checks IsDebuggerPresent
+  -> main derives the decode key from the PE image and resolves APIs
+  -> sub_140001570 writes the encrypted State value to HKCU\Software\Win32Cache
+  -> sub_140001720 creates a permanent WMI event subscription in ROOT\subscription
+  -> WMI launches powershell.exe -nop -w hidden -EncodedCommand on matching logon events
+  -> PowerShell decodes the command and reads HKCU\Software\Win32Cache\State
+  -> State is Base64 decoded, AES-CBC decrypted, and MD5 checked
+  -> recovered plaintext is Base64 decoded into the final payload
+  -> Invoke-Expression runs the TLS reverse shell to 10.10.15.38:1337
+```
 
 ## Task answers
 
@@ -247,7 +257,7 @@ The corrupted offset is `0x6C` (`0x65 + 7`).
 
 The WMI event filter checks for:
 
-```sql
+```wql
 SELECT * FROM __InstanceCreationEvent WITHIN 5 WHERE TargetInstance ISA 'Win32_LogonSession' AND (TargetInstance.LogonType = 2 OR TargetInstance.LogonType = 3 OR TargetInstance.LogonType = 7 OR TargetInstance.LogonType = 10 OR TargetInstance.LogonType = 11) 
 ```
 
@@ -275,8 +285,29 @@ So the values are `2, 3, 7, 10, 11`.
 
 > What is the IP address and port of the command-and-control (C2) server?
 
-`10.10.15.38:1337`, also from my Python replica.
+`10.10.15.38:1337`, from the decrypted final payload.
 
 ---
 
+## Persistence removal
 
+```powershell
+Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding |
+	Where-Object {
+	  $_.Filter -like '*Win32CacheState*' -and
+	  $_.Consumer -like '*Win32CacheResult*'
+	} |
+	Remove-WmiObject
+
+Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer |
+	Where-Object { $_.Name -eq 'Win32CacheResult' } |
+	Remove-WmiObject
+
+Get-WmiObject -Namespace root\subscription -Class __EventFilter |
+	Where-Object { $_.Name -eq 'Win32CacheState' } |
+	Remove-WmiObject
+
+Remove-Item -Path 'HKCU:\Software\Win32Cache' -Recurse -Force
+```
+
+That's all.
