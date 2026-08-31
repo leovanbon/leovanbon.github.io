@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HTB - Kawmikaze
-date: 2026-08-30
+date: 2026-08-31
 categories:
   - writeup
   - htb
@@ -9,6 +9,8 @@ tags:
   - htb
   - malware
 ---
+[sherlock link](https://app.hackthebox.com/sherlocks/Kawmikaze?tab=play_sherlock)
+
 *Following the recent breach at ShanoCorp, the Incident Response team identified additional affected hosts within the environment. A suspicious binary was recovered from one of the systems. Investigators determined that the endpoint protection solution had been disabled, and correlation with Prefetch artifacts confirmed the sample was executed shortly afterward. Preliminary Event Log analysis indicates the process was executed with elevated privileges.*
 
 The challenge artifact is `Kawmikaze`, a PE file. We are given 14 tasks; my approach was to understand the binary as a whole first, then answer the tasks afterward.
