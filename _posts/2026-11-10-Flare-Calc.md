@@ -1,6 +1,7 @@
 ---
 layout: post
 title: FlareCalc
+image: /attachment/flarecalc-preview.png
 date: 2026-11-10
 categories:
   - writeup
