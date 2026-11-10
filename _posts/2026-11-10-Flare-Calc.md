@@ -9,7 +9,8 @@ tags:
   - flare-on
 ---
 
-I got a prize in this year's FLARE-On, but all i did was slop my way through it (sad).
+I got a prize in this year's FLARE-On, 
+but all i did was slop my way through it 💀
 
 ![](attachment/Pasted%20image%2020261110212617.png)
 
