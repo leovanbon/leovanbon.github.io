@@ -13,7 +13,7 @@ I got a prize in this year's FLARE-On, but all i did was slop my way through it 
 
 ![](attachment/Pasted%20image%2020261110212617.png)
 
-To give the medal some meaning, I put in the effort to larp solving this one challenge. Took me some time, though I learnt quite a few things along the way.
+To give the medal some meaning, I put in the effort to reproduce the solution to this one challenge. Took me some time, though I learnt quite a few things along the way.
 
 ![426](attachment/Pasted%20image%2020261110213658.png)
 
