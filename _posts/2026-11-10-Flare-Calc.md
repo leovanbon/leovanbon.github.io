@@ -18,7 +18,6 @@ but all i did was slop my way through it 💀
 To give the medal some meaning, I put in the effort to reproduce the solution to this one challenge. Took me some time, though I learnt quite a few things along the way.
 
 ![426](attachment/Pasted%20image%2020261110213658.png)
-
 # 7 - FlareCalc
 
 ![](attachment/Pasted%20image%2020261026151135.png)
@@ -248,6 +247,12 @@ It then makes this call at `140001F8D`
 passing these arguments:
 
 ![](attachment/Pasted%20image%2020261108122802.png)
+
+Summarize, the path to hidden loader is:
+```
+0x140003B20 - Window procedure
+
+```
 
 Let's dive into the shellcode.
 
@@ -654,6 +659,7 @@ Ran it:
 I sent the recovered input with `0x33` before each byte:
 
 ![](attachment/Pasted%20image%2020261110211606.png)
+
 ## flag
 
 `t3mplat3s_asn_and_j1t_0h_my@flare-on.com`
@@ -661,3 +667,5 @@ I sent the recovered input with `0x33` before each byte:
 ![](attachment/Pasted%20image%2020261110211658.png)
 
 *nice challenge*
+
+p/s: the `asn` in the flag refers to [ASN.1](https://en.wikipedia.org/wiki/ASN.1#Example), which defines the structure of the containter holding all the encoded stubs/records

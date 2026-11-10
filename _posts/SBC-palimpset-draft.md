@@ -1,4 +1,5 @@
 
+
 ![](attachment/Pasted%20image%2020261015090950.png)
 
 i was given this task on my internship training, let's see what the binary does.
@@ -77,5 +78,4 @@ Now we need to trace back the components: the `SVG` and the `PRI1`.
 Jump back to `sub_400A95`. With quick inspection of the presented functions, i mapped out the data flow:
 
 ![](attachment/Pasted%20image%2020261015165049.png)
-
 
