@@ -1,17 +1,31 @@
+---
+layout: post
+title: FlareCalc
+date: 2026-11-10
+categories:
+  - writeup
+  - flare-on
+tags:
+  - flare-on
+---
 
-`//insert thoughts here`
+I got a prize in this year's FLARE-On, but all i did was slop my way through it (sad).
+
+![](attachment/Pasted%20image%2020261110212617.png)
+
+To give the medal some meaning, I put in the effort to larp solving this one challenge. Took me some time, though I learnt quite a few things along the way.
+
+![426](attachment/Pasted%20image%2020261110213658.png)
 
 # 7 - FlareCalc
 
 ![](attachment/Pasted%20image%2020261026151135.png)
 
+## calculator
 
-Welp, I was given a calculator.
+Welp, I was given a calculator `FlareCalc.exe`.
 
 ![](attachment/Pasted%20image%2020261026151232.png)
-
-
-## calculator
 
 ### find WndProc
 
@@ -306,6 +320,8 @@ One of those xrefs was in `sub_97BE`.
 
 `sub_97BE` runs early and creates the block if it is missing. The other functions reuse it through the heap scan. So this is the shared context.
 
+Keep these function offsets handy-we’ll encounter them throughout the shellcode.
+
 ### icmp packet
 
 Now, back to `recv` to see how the received data is processed. The breakpoint hit again:
@@ -396,13 +412,13 @@ After stepping out through the calls, I traced the checker to the call at payloa
 
 ![](attachment/Pasted%20image%2020261109160448.png)
 
-Continuing execution brought me to `7F72`, after `socket(2, 1, 6)`. This creates an IPv4 TCP socket. The API log (setup earlier) then showed `connect` (*nice, new progress*).
+Continuing execution brought me to `7F72`, after `socket(2, 1, 6)`. This creates an IPv4 TCP socket. The API log (set up earlier) then showed `connect` (*nice, new progress*).
 
 Let’s break there and inspect the destination:
 
 ![](attachment/Pasted%20image%2020261109165751.png)
 
-The dispatcher uses the local IP when building the connection address, ignoring the IP from the packet. I patched the destination to my Linux host: `C0 A8 7A 01` (`192.168.122.1`), started `nc -lvnp 4444`, and continued.
+The dispatcher uses the local IP when building the connection address, ignoring the IP from the packet. I patched the destination to my Linux host: `C0 A8 7A 01` (`192.168.122.1`), started `nc -lvnp 4444` (port `4444` to match the ICMP packet), and continued.
 
 ![](attachment/Pasted%20image%2020261109170110.png)
 
@@ -416,7 +432,7 @@ The program waited for input. I typed into `nc` and caught another `recv`. This 
 
 I focused on the large `0x33` handler.
 
-![](attachment/Pasted%20image%2020261110170756.png)
+![](attachment/Pasted%20image%2020261110181845.png)
 
 It calls `recv` again, this time reading one byte into `v7`.
 
@@ -424,25 +440,25 @@ The received byte, `v7[0]`, is then passed to `sub_113AE`, along with the value 
 
 After the call succeeds, its output replaces the value at `ctx + 73`, which becomes the first argument on the next call. If it reaches `4485`, execution enters what looks like the victory branch below.
 
+I tried forcing the exit ID, but that wasn’t enough—the branch also uses the state at `ctx + 41`.
+
 The `0x10` handler resets `ctx + 73` to `52090` and clears 32 bytes at `ctx + 41`.
 
-
+![](attachment/Pasted%20image%2020261110181751.png)
 
 So this looks like a game: each input updates the current position, while the buffer carries state between steps.
 
-Let’s follow `sub_113AE` to see what those position values select and how the input determines the next one.
+### stubs launcher
 
-### nodes
-
-I narrowed down the target to `sub_113AE`.  
+From the earlier traces, I recognized `sub_113AE`: both the `recv` wrapper and the ICMP checker ran through it. Now the `0x33` handler uses it too. Let’s see how it selects and executes those stubs.
 
 ![](attachment/Pasted%20image%2020261110153217.png)
 
-`sub_10F46` fetches the function for that fastcall, `sub_11722` cleans up.
+`sub_10F56` reconstructs the record for the indirect call. After execution, `sub_11722` wipes the buffer.
 
 ![](attachment/Pasted%20image%2020261110154936.png)
 
-Inside `sub_10F46`, with the identified API calls from dynamic attempts, the semantics is pretty guessable here:
+Inside `sub_10F56`, the identified APIs help explain the flow. It finds the encoded record, copies it into a temporary buffer, XOR-decodes it, and removes the inserted junk bytes. The resulting buffer is what `sub_113AE` executes:
 
 ![](attachment/Pasted%20image%2020261110165414.png)
 
@@ -450,16 +466,20 @@ And then:
 
 ![](attachment/Pasted%20image%2020261110162813.png)
 
-Now `bp 10FD6` and `savedata "C:\Users\mouse\Desktop\container.bin", rax, dword:[rsp+48]`
+I broke at `shellcode_base + 0x10FD6`, just after the container lookup returned, then dumped `RAX` using the length at `[RSP+48]`:
 
-Took some work to catch the key and re-implement that `sub_10F56` to a parser *(my codex friend did this, i was fed up atp)*:
+```text
+savedata "C:\Users\mouse\Desktop\container.bin", rax, dword:[rsp+48]
+```
+
+With the container dumped and the key recovered, I reproduced the decoder in Python *(my codex friend did this, I was fed up atp)*:
 
 ``` python
 import hashlib
 import sys
 from pathlib import Path
 
-key = b"8675309-88224646-31428571"
+key = b"8675309-88224646-31428571" # yes, still those calculator results
 data = Path("container.bin").read_bytes()
 outdir = Path("stubs")
 
@@ -519,16 +539,123 @@ while pos < end:
 print(f"Decoded {count} records into {outdir}")
 ```
 
-## roman clip that shi
+## kind of a directed graph
 
-Here we have 1035 funcs:
+The extractor produced 1,035 entries.
+
+![](attachment/Pasted%20image%2020261110183131.png)
+
+We start at node `52090`, with arguments `(tcp_byte, ctx + 41, 0)`. Let’s take a look:
+
+![](attachment/Pasted%20image%2020261110190029.png)
+
+I checked a few more stubs. Most are 128–188 bytes and follow the same pattern: take an input byte, modify the shared state, and return the next node ID. They also contain the same delay loop.
+
+`3821.bin` came out as garbage because I decoded an entry that already contains plaintext main shellcode. I removed it along with the helper and flag-related entries (`3822–3829`, `4485`, and `9990`), leaving 1,024 maze nodes in `stubs/`. The search treats `4485` as the exit without executing it.
+ 
+That gives us a directed graph. Each input byte selects a transition, but we also need to carry the updated state along the path. The starting point is `52090` with 32 zero bytes; the target is `4485`.
+
+### unicorn & dfs 
+
+Each node accepts one byte, so there are 256 candidates to try. Most return IDs that don’t exist. DFS follows the valid transitions while carrying a separate copy of the state for each branch.
+
+The delay loop always leaves the sum at `0x6A4AE6E0`, so the emulator supplies its final values and continues after it. I bounded the search at 32 steps.
+
+We can emulate each step with Unicorn:
+
+```python
+import struct
+from pathlib import Path
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from unicorn import Uc, UC_ARCH_X86, UC_MODE_64, UC_HOOK_CODE
+from unicorn.x86_const import *
+
+# setting up the emulator
+stub_base, stack, ctx41_addr, return_addr = 0x1000000, 0x2000000, 0x3000000, 0x4000000
+u = Uc(UC_ARCH_X86, UC_MODE_64)
+
+for addr, size in [(stub_base, 0x1000000), (stack, 0x10000),
+                   (ctx41_addr, 0x1000), (return_addr, 0x1000)]:
+    u.mem_map(addr, size)
+
+u.reg_write(UC_X86_REG_RDX, ctx41_addr)
+u.reg_write(UC_X86_REG_RSP, stack + 0x8000)
+
+initial_regs = u.context_save()
+
+# Find the delay loops
+md = Cs(CS_ARCH_X86, CS_MODE_64)
+md.detail = True
+def find_hook_points(instructions):
+    for j, ins in enumerate(instructions):
+        if j >= 7 and ins.mnemonic == 'jb' and ins.operands[0].imm < ins.address:
+            if instructions[j - 7].mnemonic == 'add' and instructions[j - 7].op_str == 'ecx, eax':
+                delay_loops[ins.operands[0].imm] = (ins.address + ins.size,
+                    instructions[j - 6].operands[0].mem.disp, instructions[j - 3].operands[0].mem.disp)
 
 
+# Load the stubs and locate their delay loops
+stubs = {int(p.stem): p.read_bytes() for p in Path('stubs').glob('*.bin')}
+stub_addrs, delay_loops = {}, {}
+for i, node_id in enumerate(sorted(stubs)):
+    addr = stub_base + i * 0x1000
+    stub_addrs[node_id] = addr
+    u.mem_write(addr, stubs[node_id])
+    find_hook_points(list(md.disasm(stubs[node_id], addr)))
 
-`(ctx + 73)` 
-### some algorithms
+# Replace the million-iteration loop with its final values
+def hook(u, addr, size, _):
+    if addr in delay_loops:
+        end, total, counter = delay_loops[addr]
+        sp = u.reg_read(UC_X86_REG_RSP)
+        u.mem_write(sp + total, struct.pack('<I', 0x6a4ae6e0))
+        u.mem_write(sp + counter, struct.pack('<I', 1000000))
+        u.reg_write(UC_X86_REG_EAX, 1000000)
+        u.reg_write(UC_X86_REG_ECX, 0x6a4ae6e0)
+        u.reg_write(UC_X86_REG_EFLAGS, 0x246)
+        u.reg_write(UC_X86_REG_RIP, end)
+
+u.hook_add(UC_HOOK_CODE, hook)
+
+# run
+def run(node_id, input_byte, ctx41):
+    u.context_restore(initial_regs)
+    u.mem_write(ctx41_addr, ctx41)
+    u.mem_write(stack, bytes(0x10000))
+    u.mem_write(stack + 0x8000, struct.pack('<Q', return_addr))
+    u.reg_write(UC_X86_REG_RCX, input_byte)
+    u.emu_start(stub_addrs[node_id], return_addr, count=1000)
+    if u.reg_read(UC_X86_REG_RIP) != return_addr:
+        raise RuntimeError(f'Node {node_id} did not return')
+    return u.reg_read(UC_X86_REG_EAX), bytes(u.mem_read(ctx41_addr, 32))
 
 
-### finally
+def dfs(node_id=52090, ctx41=bytes(32), inputs=b''):
+    if node_id == 4485:
+        return inputs
+    if len(inputs) >= 32:  # search depth limit
+        return
+    for input_byte in range(256):
+        next_id, next_ctx41 = run(node_id, input_byte, ctx41)
+        if next_id in stubs or next_id == 4485:
+            result = dfs(next_id, next_ctx41, inputs + bytes([input_byte]))
+            if result:
+                return result
 
+print(dfs())
+```
+
+Ran it:
+
+![](attachment/Pasted%20image%2020261110211303.png)
+
+I sent the recovered input with `0x33` before each byte:
+
+![](attachment/Pasted%20image%2020261110211606.png)
 ## flag
+
+`t3mplat3s_asn_and_j1t_0h_my@flare-on.com`
+
+![](attachment/Pasted%20image%2020261110211658.png)
+
+*nice challenge*
