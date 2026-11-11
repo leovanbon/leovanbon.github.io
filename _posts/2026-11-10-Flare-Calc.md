@@ -668,4 +668,4 @@ I sent the recovered input with `0x33` before each byte:
 
 *nice challenge*
 
-p/s: the `asn` in the flag refers to [ASN.1](https://en.wikipedia.org/wiki/ASN.1#Example), which defines the structure of the containter holding all the encoded stubs/records
+*trivia: the `asn` in the flag refers to [ASN.1](https://en.wikipedia.org/wiki/ASN.1#Example), which defines the structure of the containter holding all the encoded stubs/records*
