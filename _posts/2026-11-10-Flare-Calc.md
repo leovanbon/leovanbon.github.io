@@ -30,7 +30,7 @@ Welp, I was given a calculator `FlareCalc.exe`.
 
 ### find WndProc
 
-My first goal was to locate the window procedure - `lpfnWndProc`.
+My first goal was to locate the window procedure—`lpfnWndProc`.
 I found `CreateWindowExW` in the imports and checked its xrefs:
 
 ![](attachment/Pasted%20image%2020261026151757.png)
@@ -327,7 +327,7 @@ One of those xrefs was in `sub_97BE`.
 
 `sub_97BE` runs early and creates the block if it is missing. The other functions reuse it through the heap scan. So this is the shared context.
 
-Keep these function offsets handy-we’ll encounter them throughout the shellcode.
+Keep these function offsets handy—we’ll encounter them throughout the shellcode.
 
 ### icmp packet
 
