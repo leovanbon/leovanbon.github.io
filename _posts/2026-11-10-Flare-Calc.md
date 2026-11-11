@@ -248,12 +248,6 @@ passing these arguments:
 
 ![](attachment/Pasted%20image%2020261108122802.png)
 
-Summarize, the path to hidden loader is:
-```
-0x140003B20 - Window procedure
-
-```
-
 Let's dive into the shellcode.
 
 ## shellcode
